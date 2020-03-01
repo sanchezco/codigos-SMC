@@ -10,7 +10,7 @@ arduino = serial.Serial('/dev/ttyACM0', 9600)
 def cad_proc(cad):
     print ("\n\nInicio------------------------------------------------>" + cad)
     try:
-
+ 
         json_decoded = json.loads(cad)
         sensor = json_decoded['idsensor']
         value = json_decoded['valor']
