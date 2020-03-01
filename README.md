@@ -7,6 +7,7 @@ A través Arduino se recogerán los datos de los sensores, estos se enviarán a 
 
 En el repositorio se encuentran todos los códigos que se han utilizado, tanto para los casos prácticos de la asignatura como para 
 la entrega:
+
 ---
 - [**Arduino**](https://github.com/sanchezco/codigos-SMC/tree/master/1%20-%20Arduino) : códigos de la toma de datos de los sensores
 ---
