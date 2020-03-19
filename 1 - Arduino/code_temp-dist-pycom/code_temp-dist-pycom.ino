@@ -1,6 +1,6 @@
 // código del sensor de temperatura y distancia en json modificado para utilizarlo
 // con la pycom: se añade una ? al final de la cadena para saber donde acaba.
-
+//
 //Librerías utilizadas
 #include <ArduinoJson.h>
 #include <HCSR04.h> //by Martin Sosic
