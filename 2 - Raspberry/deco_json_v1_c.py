@@ -14,10 +14,10 @@ def cad_proc(cad):
         json_decoded = json.loads(cad)
         ##print(y)
         #for x in json_loaded:
-    
+
         print (json_decoded ['idsensor'])
-        print (json_decoded ['valor'])     
-    
+        print (json_decoded ['valor'])
+
 
         sensor = json_decoded['idsensor']
         value = json_decoded['valor']
