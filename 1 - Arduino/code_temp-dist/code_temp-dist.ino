@@ -1,3 +1,5 @@
+//Codigo del sensor de distancia y temperatura básico y explicado
+
 //Librerías utilizadas
 #include <ArduinoJson.h>
 #include <HCSR04.h> //by Martin Sosic
@@ -12,20 +14,20 @@ DallasTemperature sensors(&ds);
 UltraSonicDistanceSensor distanceSensor(TRIG_PIN, ECHO_PIN);
 
 void setup (){
-  Serial.begin(9600); 
+  Serial.begin(9600);
 }
 void loop(){
     DynamicJsonBuffer jBuffer; // permite crear un objeto json (distancia)
     JsonObject& distancia = jBuffer.createObject(); //creo el objeto distancia
-    float temp; 
+    float temp;
     int distance;
     String cad;
-    // dentro del objeto distancia tengo la variable idsensor que será fija, y el 
+    // dentro del objeto distancia tengo la variable idsensor que será fija, y el
     // valor de la lectura del sensor.
-    distancia["idsensor"].set("1"); 
+    distancia["idsensor"].set("1");
     distancia["valor"].set(Fdistance());
-    distancia.printTo(Serial); 
-    
+    distancia.printTo(Serial);
+
     Serial.println();
     delay(200);
 
@@ -34,7 +36,7 @@ void loop(){
     temperatura["idsensor"].set("2");
     temperatura["valor"].set(Ftemp());
     temperatura.printTo(Serial);
-    Serial.println();   
+    Serial.println();
     delay(2000);
 }
 double Fdistance(){
@@ -43,8 +45,8 @@ double Fdistance(){
 }
 float Ftemp(){
   float f = -127; //En caso de error aparecerá el -127
-  sensors.requestTemperatures();  
+  sensors.requestTemperatures();
   delay (100);
   f = sensors.getTempCByIndex(0);
-  return f;  
+  return f;
 }

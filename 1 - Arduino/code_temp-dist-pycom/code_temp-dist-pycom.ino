@@ -1,3 +1,6 @@
+// código del sensor de temperatura y distancia en json modificado para utilizarlo
+// con la pycom: se añade una ? al final de la cadena para saber donde acaba.
+
 //Librerías utilizadas
 #include <ArduinoJson.h>
 #include <HCSR04.h> //by Martin Sosic
@@ -11,44 +14,34 @@ OneWire  ds(TEMP_PIN);
 DallasTemperature sensors(&ds);
 UltraSonicDistanceSensor distanceSensor(TRIG_PIN, ECHO_PIN);
 
-int pinLed = 13;
-
 void setup (){
-  Serial.begin(9600); 
-  pinMode(pinLed, OUTPUT);
-  sensors.begin();
-
+  Serial.begin(9600);
 }
 void loop(){
     DynamicJsonBuffer jBuffer; // permite crear un objeto json (distancia)
     JsonObject& distancia = jBuffer.createObject(); //creo el objeto distancia
-    float temp; 
+    float temp;
     int distance;
     String cad;
-    // dentro del objeto distancia tengo la variable idsensor que será fija, y el 
+    // dentro del objeto distancia tengo la variable idsensor que será fija, y el
     // valor de la lectura del sensor.
-    distancia["idsensor"].set("1"); 
+    distancia["idsensor"].set("1");
     distancia["valor"].set(Fdistance());
-    distancia.printTo(Serial);     
+    distancia.printTo(Serial);
+//CAMBIO
+    Serial.print('?'); // porque quiero que me detecte la ? para parar el codigo, por lo tanto no valdria si lo mando por usb
     Serial.println();
-    delay(500);
+
+    delay(200);
 
     // repito el mismo proceso para añadir el objeto temperatura.
     JsonObject& temperatura = jBuffer.createObject();
     temperatura["idsensor"].set("2");
     temperatura["valor"].set(Ftemp());
     temperatura.printTo(Serial);
-    Serial.println();   
-    delay(3000);
-
-//    if (Fdistance()<20){
-//      alarma();
-//    } else { 
-//      digitalWrite(pinLed,LOW);
-//    }    
-//    readserial();
-//
-//    delay(3000);
+    Serial.print('?');
+    Serial.println();
+    delay(2000);
 }
 double Fdistance(){
   int d = distanceSensor.measureDistanceCm() ;
@@ -56,27 +49,8 @@ double Fdistance(){
 }
 float Ftemp(){
   float f = -127; //En caso de error aparecerá el -127
-  sensors.requestTemperatures();  
+  sensors.requestTemperatures();
   delay (100);
   f = sensors.getTempCByIndex(0);
-  return f;  
+  return f;
 }
-
-char readserial(){
-  if (Serial.available()) { //Si está disponible el puerto serie
-      char c_ = Serial.read(); //Guardamos la lectura en una variable char
-      if (c_ == 'H') { //Si es una 'H', enciendo el LED
-         digitalWrite(pinLed, HIGH);
-      } else if (c_ == 'L') { //Si es una 'L', apago el LED
-         digitalWrite(pinLed, LOW);
-      }
-   }
-}
-
-//char alarma(){ // si recibe un dato fuera de rango parpadea
-//      digitalWrite(pinLed,HIGH);  
-//      delay(200);
-//      digitalWrite(pinLed,LOW);  
-//      delay(200);
-//      digitalWrite(pinLed,HIGH);
-//}

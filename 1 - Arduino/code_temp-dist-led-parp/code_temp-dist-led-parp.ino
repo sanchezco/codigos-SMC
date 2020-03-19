@@ -1,3 +1,6 @@
+// codigo completo con sensor de temperatura, distancia, y alarma que enciende el pinLed
+// si la distancia es menor que 20 salta la alarma
+
 //Librerías utilizadas
 #include <ArduinoJson.h>
 #include <HCSR04.h> //by Martin Sosic
@@ -14,19 +17,19 @@ UltraSonicDistanceSensor distanceSensor(TRIG_PIN, ECHO_PIN);
 int pinLed = 13;
 
 void setup (){
-  Serial.begin(9600); 
+  Serial.begin(9600);
   pinMode(pinLed, OUTPUT);
   sensors.begin();
 }
 void loop(){
     DynamicJsonBuffer jBuffer;           // Permite crear un objeto json (distancia)
     JsonObject& distancia = jBuffer.createObject(); //Creo el objeto distancia
-    float temp; 
+    float temp;
     int distance;
-    
+
     distancia["idsensor"].set("1");      // Dentro del objeto distancia, sensorid tendrá el identificador '1'
     distancia["valor"].set(Fdistance()); // Valor de lectura del sensor
-    distancia.printTo(Serial);     
+    distancia.printTo(Serial);
     Serial.println();
     delay(300);
 
@@ -34,12 +37,12 @@ void loop(){
     temperatura["idsensor"].set("2");    // Dentro del objeto temperatura, sensorid tendrá el identificador '2'
     temperatura["valor"].set(Ftemp());   // Valor de lectura del sensor
     temperatura.printTo(Serial);
-    Serial.println();   
+    Serial.println();
     delay(300);
 
     if (Fdistance()<20){                 // Si el dato está fuera del rango deseado salta la alarma 3seg.
       alarma();
-    } else { 
+    } else {
       digitalWrite(pinLed,LOW);
     }
     delay(3000);
@@ -51,16 +54,16 @@ double Fdistance(){
 }
 float Ftemp(){
   float f = -127;                        //En caso de error aparecerá el -127
-  sensors.requestTemperatures();  
+  sensors.requestTemperatures();
   delay (100);
   f = sensors.getTempCByIndex(0);
-  return f;  
+  return f;
 }
 
 char alarma(){                           // Si recibe un dato fuera de rango parpadea
-      digitalWrite(pinLed,HIGH);  
+      digitalWrite(pinLed,HIGH);
       delay(200);
-      digitalWrite(pinLed,LOW);  
+      digitalWrite(pinLed,LOW);
       delay(200);
       digitalWrite(pinLed,HIGH);
 }
