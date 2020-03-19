@@ -1,3 +1,5 @@
+#Codigo para controlar el arduino por el puerto serie del pc
+
 #!/usr/bin/env python
 import serial
 
@@ -14,4 +16,3 @@ while True:
             print('LED APAGADO')
 
 arduino.close() #Finalizamos la comunicacion
-

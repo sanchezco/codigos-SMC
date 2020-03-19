@@ -1,3 +1,5 @@
+# Se añade la notificación por correo de las alarmas
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import serial
@@ -10,17 +12,17 @@ arduino = serial.Serial('/dev/ttyACM0', 9600)
 def cad_proc(cad):
     print ("\n\nInicio------------------------------------------------>" + cad)
     try:
- 
+
         json_decoded = json.loads(cad)
         sensor = json_decoded['idsensor']
         value = json_decoded['valor']
 
         if int(sensor) ==2 and float(value) >=20:
-            os.system('echo \"Alarma en el sensor de temperatura-->se han superado 28 Grados\" | mail -s \"Alarma\" c.sanchezcorte@gmail.com')
+            os.system('echo \"Alarma en el sensor de temperatura--> Temperatura superior a 20 Grados\" | mail -s \"Alarma\" c.sanchezcorte@gmail.com')
             send_mysql(str(sensor),str(value),"1")
 
         elif int(sensor) ==1 and int(value)>= 10:
-            os.system('echo \"Alarma en el sensor de distancia-->caja manipulada\" | mail -s \"Alarma\" c.sanchezcorte@gmail.com')
+            os.system('echo \"Alarma en el sensor de distancia--> Distancia menor a 10 cm \" | mail -s \"Alarma\" c.sanchezcorte@gmail.com')
             send_mysql(str(sensor),str(value),"1")
 
         else:
