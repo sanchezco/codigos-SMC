@@ -1,5 +1,7 @@
-# Mejora del código que introduce las alarmas cuando el valor es mejor a 20cm
+#...........................................................
+# Se añade la alarma cuando el valor es mejor a 20cm
 # o superior a 80ºC
+#...........................................................
 
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-

@@ -1,5 +1,5 @@
 /***************************************************************************
-Código del sensor BME280 
+Código del sensor BME280
 Lectura de temperatura, presión, altitud y humedad en formato Json
  ***************************************************************************/
 #include <ArduinoJson.h>
@@ -17,13 +17,13 @@ void setup() {
     while(!Serial);    // time to get serial running
 
     unsigned status;
-    
+
     // default settings
-    status = bme.begin();  
+    status = bme.begin();
     if (!status) {
         Serial.println("Could not find a valid BME280 sensor, check wiring, address, sensor ID!");
         Serial.print("SensorID was: 0x"); Serial.println(bme.sensorID(),16);
-        Serial.print("        ID of 0xFF probably means a bad address, a BMP 180 or BMP 085\n");
+        Serial.print("   ID of 0xFF probably means a bad address, a BMP 180 or BMP 085\n");
         Serial.print("   ID of 0x56-0x58 represents a BMP 280,\n");
         Serial.print("        ID of 0x60 represents a BME 280.\n");
         Serial.print("        ID of 0x61 represents a BME 680.\n");
@@ -31,7 +31,7 @@ void setup() {
     }
 }
 
-void loop() { 
+void loop() {
     DynamicJsonBuffer jBuffer; // permite crear un objeto json (distancia)
 
     JsonObject& temperatura = jBuffer.createObject(); // Unidades en grados centígrados

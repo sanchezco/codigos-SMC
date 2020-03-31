@@ -1,4 +1,6 @@
+#...........................................................
 #Codigo para controlar el arduino por el puerto serie del pc
+#...........................................................
 
 #!/usr/bin/env python
 import serial

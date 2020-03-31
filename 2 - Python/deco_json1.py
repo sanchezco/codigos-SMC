@@ -1,5 +1,7 @@
+#...........................................................
 # Decodificador json: lee el dato de  temperatura y distancia, y lo manda a la
 # base de datos iot
+#...........................................................
 
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-

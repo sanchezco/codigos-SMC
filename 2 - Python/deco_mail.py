@@ -1,4 +1,9 @@
-# Se añade la notificación por correo de las alarmas
+#...........................................................
+#  - Se añade la alarma cuando el valor es mejor a 20cm o superior a 80ºC
+#  - Se añade la notificación por correo de las alarmas
+#...........................................................
+
+
 
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
