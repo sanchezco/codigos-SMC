@@ -1,5 +1,5 @@
 # códigos-SMC
-El objetivo de la es la construcción de un sistema LAMP (Linux-Apapche-MySQL-PHP) para la asignatura de Sistema de Monitorización y Control del Máster de Ingeniería Industrial URJC.
+El objetivo de la es la construcción de un sistema LAMP (Linux-Apache-MySQL-PHP) para la asignatura de Sistema de Monitorización y Control del Máster de Ingeniería Industrial URJC.
 
 A través Arduino se recogerán los datos de los sensores, estos se enviarán a la Raspberry Pi por el puerto serie y posteriormente se mandará a la base de datos creada. Por último, se realizará la representación gráfica de los datos. El equema a seguir es:
 
