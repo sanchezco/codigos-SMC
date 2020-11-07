@@ -1,5 +1,7 @@
 #...........................................................
-#  - Se añade la alarma cuando el valor es mejor a 20cm o superior a 80ºC
+#  - Se añade la alarma cuando el valor es mejor a 20cm o superior a 27ºC
+#  - Se han modificado los valores para poder comprobar su funcionamiento,
+#    pero habría que ajustar los rangos en función de la aplicación
 #  - Se añade la notificación por correo de las alarmas
 #...........................................................
 
@@ -22,11 +24,11 @@ def cad_proc(cad):
         sensor = json_decoded['idsensor']
         value = json_decoded['valor']
 
-        if int(sensor) ==2 and float(value) >=20:
+        if int(sensor) ==2 and float(value) >=27:
             os.system('echo \"Alarma en el sensor de temperatura--> Temperatura superior a 20 Grados\" | mail -s \"Alarma\" c.sanchezcorte@gmail.com')
             send_mysql(str(sensor),str(value),"1")
 
-        elif int(sensor) ==1 and int(value)>= 10:
+        elif int(sensor) ==1 and int(value)<= 20:
             os.system('echo \"Alarma en el sensor de distancia--> Distancia menor a 10 cm \" | mail -s \"Alarma\" c.sanchezcorte@gmail.com')
             send_mysql(str(sensor),str(value),"1")
 
